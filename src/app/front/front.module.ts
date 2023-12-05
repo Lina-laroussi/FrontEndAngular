@@ -12,6 +12,8 @@ import { DemandeEmpruntComponent } from './components/demande-emprunt/demande-em
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { LivreComponent } from './components/livre/livre.component';
+import { ListEmpruntsLivresComponent } from './components/list-emprunts-livres/list-emprunts-livres.component';
+import { MsgErrorSuccessComponent } from './components/msg-error-success/msg-error-success.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { LivreComponent } from './components/livre/livre.component';
     ListLivresComponent,
     LivreDetailsComponent,
     DemandeEmpruntComponent,
-    LivreComponent
+    LivreComponent,
+    ListEmpruntsLivresComponent,
+    MsgErrorSuccessComponent
   ],
   imports: [
     CommonModule,

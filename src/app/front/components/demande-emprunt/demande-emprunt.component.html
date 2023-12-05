@@ -21,17 +21,8 @@
                 <h4 class="card-title text-center">Demande d'emprunt pour le livre</h4>
                 <h4 class="card-title text-center titre">{{livre.titre}}</h4>
 
-                <div *ngIf="msg">
-                    <div class="alert alert-success" role="alert">
-                        {{msg}}
-                    </div>
-                </div>
-    
-                <div *ngIf="error">
-                    <div class="alert alert-danger" role="alert">
-                        {{error}}
-                    </div>
-                </div>
+                <app-msg-error-success #MsgErrorSuccess  (messageEvent)="receiveMessage($event)"></app-msg-error-success>
+
     
 
                 <form class="forms-sample" [formGroup]="empruntForm" (ngSubmit)="emprunterLivre()">

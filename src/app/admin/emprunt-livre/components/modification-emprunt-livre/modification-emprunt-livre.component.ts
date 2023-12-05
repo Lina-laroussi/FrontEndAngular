@@ -77,7 +77,12 @@ export class ModificationEmpruntLivreComponent implements OnInit {
 
 
   modifierEmpruntLivre(){
-     this.empruntLivreService.modifierEmpruntLivre(this.data.empruntId,this.modifEmpruntForm.value.dateDebutEmprunt,this.modifEmpruntForm.value.dateFinEmprunt,this.modifEmpruntForm.value.livreSelect,this.data.livreId).subscribe(
+
+     this.empruntLivreService.modifierEmpruntLivre(this.data.empruntId,
+      this.modifEmpruntForm.value.dateDebutEmprunt,
+      this.modifEmpruntForm.value.dateFinEmprunt,
+      this.modifEmpruntForm.value.livreSelect,
+      this.data.livreId).subscribe(
       ()=>{
         this.msg = "Emprunt livre modifié avec succées"        
      },

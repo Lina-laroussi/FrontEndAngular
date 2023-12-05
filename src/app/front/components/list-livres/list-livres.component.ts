@@ -1,4 +1,4 @@
-import { Component , OnInit } from '@angular/core';
+import { Component , EventEmitter, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { Livre } from 'src/app/core/models/livre.model';
 import { LivreService } from 'src/app/core/services/livre.service';
@@ -27,6 +27,7 @@ export class ListLivresComponent implements OnInit {
 
   category !: any; 
   imageBanniere !: string;
+
 
   ngOnInit(): void {
      

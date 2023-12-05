@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit , Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Categorie } from 'src/app/core/models/categorie.model';
@@ -16,6 +16,7 @@ export class ListCategorieComponent implements OnInit{
   constructor(private categorieService:CategorieService , private livreService:LivreService , private router:Router){
 
   }
+
 
   urlImage : string  = 'http://localhost:8080/images' 
 

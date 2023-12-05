@@ -27,6 +27,9 @@ export class ModificationDialogComponent implements OnInit {
 
   categorie !: Categorie;
 
+  urlImage : string  = 'http://localhost:8080/images' 
+
+
   onFileChanged(event: any): void {
     this.selectedFile =  event.target.files[0];
   }
@@ -60,14 +63,27 @@ export class ModificationDialogComponent implements OnInit {
 
 
   modifierCategorie(){
-    this.categorieService.modifierCategorie(this.data.categorieId,this.modificationCategorieForm.get('nom')?.value,this.modificationCategorieForm.get('description')?.value,this.selectedFile).subscribe(
-      ()=>{
-        this.msg = "Categorie modifié avec succées"
-          },
-     ()=>{
-        this.error = "Il ya une erreur qui est survenu"
-     }
-    )
+   
+
+    const nouveauNom = this.modificationCategorieForm.get('nom')?.value;
+    const nouveauDescription = this.modificationCategorieForm.get('description')?.value;
+    const nouveauImage = this.selectedFile;
+
+    const nomFinal = nouveauNom !== null ? nouveauNom : this.categorie.nom;
+    const descriptionFinal = nouveauDescription !== null ? nouveauDescription : this.categorie.description;
+
+    const defaultImageValue = new File([this.urlImage], this.categorie.image);
+
+    const imageFinal = nouveauImage !== null && nouveauImage !== undefined ? nouveauImage: defaultImageValue
+
+    this.categorieService.modifierCategorie(this.data.categorieId, nomFinal, descriptionFinal,imageFinal).subscribe(
+      () => {
+        this.msg = "Catégorie modifiée avec succès";
+      },
+      () => {
+        this.error = "Une erreur est survenue lors de la modification de la catégorie";
+      }
+    );
 
   }
 

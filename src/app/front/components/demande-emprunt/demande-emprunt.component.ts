@@ -1,4 +1,4 @@
-import { Component , OnInit } from '@angular/core';
+import { Component , OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -6,6 +6,9 @@ import { Livre } from 'src/app/core/models/livre.model';
 import { CategorieService } from 'src/app/core/services/categorie.service';
 import { EmpruntLivreService } from 'src/app/core/services/empruntLivre.service';
 import { LivreService } from 'src/app/core/services/livre.service';
+import { MsgErrorSuccessComponent } from '../msg-error-success/msg-error-success.component';
+import { ListLivresComponent } from '../list-livres/list-livres.component';
+import { ListCategorieComponent } from '../list-categorie/list-categorie.component';
 
 @Component({
   selector: 'app-demande-emprunt',
@@ -29,9 +32,15 @@ export class DemandeEmpruntComponent implements OnInit{
   email !: RegExp;
 
 
-  msg !: string;
+  msg: string | undefined;
+  error: string | undefined;
 
-  error !: string;
+  @ViewChild('MsgErrorSuccess') MsgErrorSuccess !: MsgErrorSuccessComponent;
+
+  receiveMessage(message: { msg: string; error: string }) {
+    this.msg = message.msg;
+    this.error = message.error;
+  }
 
   ngOnInit(): void {
 
@@ -54,17 +63,29 @@ export class DemandeEmpruntComponent implements OnInit{
     return this.empruntForm.controls;
   }
 
+ 
+
 
   emprunterLivre(){
      this.empruntLivreService.addEmpruntLivre(this.empruntForm.get('email')?.value,this.empruntForm.get('dateDebutEmprunt')?.value,this.empruntForm.get('dateFinEmprunt')?.value , this.idLivre).subscribe(
       ()=>{
-        this.msg = "La demande a eté envoyé avec succées, nous vous enverrons un e-mail de confirmation pour l'emprunt"
-        this.empruntForm.reset();
+
+      this.msg = "La demande a été envoyée avec succès, nous vous enverrons un e-mail de confirmation pour l'emprunt";
+      this.error = '';
+
+      this.MsgErrorSuccess.sendMessage(this.msg, this.error);
+    
+       
+      this.empruntForm.reset();
         
         
      },
      ()=>{
-          this.error = "Il ya une erreur qui est survenu"
+      this.msg = '';
+      this.error = "Il y a une erreur qui est survenue";
+
+      this.MsgErrorSuccess.sendMessage(this.msg, this.error);
+    
      }
      )
   }

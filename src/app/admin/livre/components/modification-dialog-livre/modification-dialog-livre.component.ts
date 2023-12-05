@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { LivreService } from '../../../../core/services/livre.service';
@@ -12,7 +12,7 @@ import { Categorie } from 'src/app/core/models/categorie.model';
   templateUrl: './modification-dialog-livre.component.html',
   styleUrls: ['./modification-dialog-livre.component.scss']
 })
-export class ModificationDialogLivreComponent {
+export class ModificationDialogLivreComponent implements OnInit {
 
   constructor(private formBuilder:FormBuilder,public dialogRef: MatDialogRef<ModificationDialogLivreComponent>,
     private livreService:LivreService, private categorieService:CategorieService,
@@ -34,6 +34,9 @@ export class ModificationDialogLivreComponent {
 
   categorie !: any;
 
+
+  urlImage : string  = 'http://localhost:8080/images_livres' 
+
   categorieList !: Observable<Categorie[]>
 
 
@@ -54,6 +57,8 @@ export class ModificationDialogLivreComponent {
       }
     )
 
+    console.log(this.selectedFile)
+
 
     this.livreService.getLivre(this.data.livreId).subscribe(
       result=>{
@@ -71,8 +76,11 @@ export class ModificationDialogLivreComponent {
           nomAuteur:result.nomAuteur,
           nbPages:result.nbPages,
           dateDePublication: formattedDate,
-          image : result.image
+          image : result.image,
+          disponibilite : result.disponibilite
         }
+        console.log(this.livre)
+
       }
     );
 
@@ -97,15 +105,38 @@ export class ModificationDialogLivreComponent {
 
 
   modifierLivre(){
-    console.log( this.modificationLivreForm.get('disponibilite')?.value)
+
+    const nouveauTitre = this.modificationLivreForm.get('titre')?.value;
+    const nouveauDescription = this.modificationLivreForm.get('description')?.value;
+    const nouveauAuteur = this.modificationLivreForm.get('nomAuteur')?.value;
+    const nouveauPages = this.modificationLivreForm.get('nbPages')?.value;
+    const nouveauDate = this.modificationLivreForm.get('dateDePublication')?.value;
+    const nouveauCategorie = this.modificationLivreForm.get('categorie')?.value;
+    const nouveauDisp = this.modificationLivreForm.get('disponibilite')?.value;
+    const nouveauImage = this.selectedFile;
+
+    const titreFinal = nouveauTitre !== null ? nouveauTitre : this.livre.titre;
+    const descriptionFinal = nouveauDescription !== null ? nouveauDescription : this.livre.description;
+    const auteurFinal = nouveauAuteur !== null ? nouveauAuteur : this.livre.nomAuteur;
+    const pagesFinal = nouveauPages !== null ? nouveauPages : this.livre.nbPages;
+    const dateFinal = nouveauDate !== null ? nouveauDate : this.livre.dateDePublication;
+    const CategorieFinal = nouveauCategorie !== null ? nouveauCategorie : this.data.categorieId;
+    const DispFinal = nouveauDisp !== null ? nouveauDisp : this.livre.disponibilite ? 1 : 0;
+
+
+    const defaultImageValue = new File([this.urlImage], this.livre.image);
+    const imageFinal = nouveauImage !== null && nouveauImage !== undefined ? nouveauImage: defaultImageValue
+
+
+    
     this.livreService.modifierLivre(this.data.livreId,
-      this.modificationLivreForm.get('titre')?.value,
-      this.modificationLivreForm.get('description')?.value,
-      this.modificationLivreForm.get('nomAuteur')?.value,
-      this.modificationLivreForm.get('nbPages')?.value,
-      this.modificationLivreForm.get('dateDePublication')?.value,
-      this.modificationLivreForm.get('categorie')?.value,
-      this.modificationLivreForm.get('disponibilite')?.value,
+      titreFinal,
+      descriptionFinal,
+      auteurFinal,
+      pagesFinal,
+      dateFinal,
+      CategorieFinal,
+      DispFinal,
       this.selectedFile).subscribe(
       ()=>{
         this.msg = "Livre modifié avec succées"
@@ -114,6 +145,8 @@ export class ModificationDialogLivreComponent {
         this.error = "Il ya une erreur qui est survenu"
      }
     )
+
+  
 
   }
 
