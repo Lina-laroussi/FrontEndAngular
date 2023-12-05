@@ -3,6 +3,8 @@
       <div class="card">
       <div class="card-body">
           <h4 class="card-title">Ajouter Bibliotheque </h4>
+          <app-msgerreur #MsgErrorSuccess  (messageEvent)="receiveMessage($event)"></app-msgerreur>
+
             <form [formGroup]="biblioForm" (ngSubmit)="AjouterBiblio()" >
              <!--<input type="hidden" formControlName="idBibliotheque">-->
 

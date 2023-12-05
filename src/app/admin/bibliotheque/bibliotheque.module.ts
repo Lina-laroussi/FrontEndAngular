@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AjoutLivreComponent } from './components/ajout-livre/ajout-livre.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { MsgerreurComponent } from './components/msgerreur/msgerreur.component';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { MatButtonModule } from '@angular/material/button';
     UpdatebiblioComponent,
     ListbiblioComponent,
     AjoutLivreComponent,
+    MsgerreurComponent,
  
   ],
   imports: [

@@ -1,7 +1,8 @@
-import { Component , OnInit } from '@angular/core';
+import { Component , OnInit , ViewChild } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import { BiblioService } from 'src/app/core/services/BiblioService';
 import { ActivatedRoute , Router} from '@angular/router';
+import { MsgerreurComponent } from '../msgerreur/msgerreur.component';
 
 
 @Component({
@@ -15,6 +16,16 @@ export class AddbiblioComponent implements OnInit {
   biblioForm! : FormGroup;
   selectedFile!: File;
   nameFile!:string
+  
+  msg: string | undefined;
+  error: string | undefined;
+
+  @ViewChild('MsgErrorSuccess') MsgErrorSuccess !: MsgerreurComponent;
+
+  receiveMessage(message: { msg: string; error: string }) {
+    this.msg = message.msg;
+    this.error = message.error;
+  }
 
   onFileChanged(event: any): void {
     this.selectedFile = event.target.files[0];
@@ -48,10 +59,17 @@ export class AddbiblioComponent implements OnInit {
       this.selectedFile).subscribe(
 
         ()=>{
-          console.log("Evenement ajouté avec succes")
+          this.msg = "La Bibliotheque a été ajoutée avec succès.";
+          this.error = '';
+          this.MsgErrorSuccess.sendMessage(this.msg, this.error);          
           this.biblioForm.reset();
           this.refreshBibliosList();
   
+        },()=>{
+          this.msg = '';
+      this.error = "Il y a une erreur qui est survenue";
+
+      this.MsgErrorSuccess.sendMessage(this.msg, this.error);
         }
       )
     }
