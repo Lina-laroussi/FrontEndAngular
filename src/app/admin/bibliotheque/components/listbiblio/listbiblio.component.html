@@ -33,7 +33,7 @@
                 <tbody>
                   <tr>
                     
-                  <tr *ngFor="let biblio of biblioList | async">
+                  <tr *ngFor="let biblio of biblioList | async" appBackground >
                     <td><img [src]="urlImage + '/' + biblio.idBibliotheque + '/' + biblio.imageB" alt=" Image" width="50" height="50"></td>
                     <td>{{biblio.nomB | titlecase}}</td>
                     <td>{{biblio.email}}</td>

@@ -89,7 +89,9 @@
            
             <button type="submit" class="btn btn-primary mr-2" [disabled]="biblioForm.invalid">Modifier</button>
             <button type="button" class="btn btn-light" (click)="biblioForm.reset()">Annuler</button>
-  
+            <button matTooltip="Edit Task" class="btn btn-info bnt-rounded btn-icon" [routerLink]="['/admin/bibliotheque/listbiblio']">
+              <i class="mdi mdi-format-list-bulleted-type"></i>
+            </button>
             </form>
         </div>
         </div>

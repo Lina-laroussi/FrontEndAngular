@@ -72,8 +72,18 @@ export class CalendarComponent implements OnInit {
   ngOnInit() {
     this.loadEvents();
     this.evenementService.selectedDate$.subscribe((selectedDate) => {
+    
       if (selectedDate) {
-        this.openAddEventDialog(selectedDate);
+        console.log(selectedDate)
+        const originaldate = new Date(selectedDate);
+      const formatteddateDebut =
+      originaldate.getFullYear() +
+        '-' +
+        ('0' + (originaldate.getMonth() + 1)).slice(-2) +
+        '-' +
+        ('0' + originaldate.getDate()).slice(-2);
+
+        this.openAddEventDialog(formatteddateDebut);
         this.evenementService.resetSelectedDate();
       }
     });
@@ -157,7 +167,7 @@ export class CalendarComponent implements OnInit {
       console.error('An error occurred in handleDateClick:', error);
     }
   }
-  openAddEventDialog(selectedDate: Date) {
+  openAddEventDialog(selectedDate: string) {
     const dialogRef = this.dialog.open(AddevenementComponent, {
       data: { dateDebut: selectedDate },
       width: '800px',
@@ -168,7 +178,6 @@ export class CalendarComponent implements OnInit {
     dialogRef.componentInstance.parentData = 'Data que vous voulez passer au composant enfant';
 
     dialogRef.afterClosed().subscribe((result) => {
-      // Traitez le résultat si nécessaire
     });
   }
 

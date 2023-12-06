@@ -10,6 +10,7 @@ import { AjoutLivreComponent } from './components/ajout-livre/ajout-livre.compon
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MsgerreurComponent } from './components/msgerreur/msgerreur.component';
+import { BackgroundDirective } from './components/directives/directives.directive';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { MsgerreurComponent } from './components/msgerreur/msgerreur.component';
     ListbiblioComponent,
     AjoutLivreComponent,
     MsgerreurComponent,
+    BackgroundDirective
  
   ],
   imports: [

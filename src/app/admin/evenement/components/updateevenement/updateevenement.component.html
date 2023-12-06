@@ -2,7 +2,7 @@
     <div class="col-12 grid-margin stretch-card">
         <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Ajouter Evenement </h4>
+            <h4 class="card-title">Modifier Evenement </h4>
             <form [formGroup]="eventForm" (ngSubmit)=" ModifierEvent()">
                 
                <!-- <div class="form-group">
@@ -19,6 +19,7 @@
                 </div>
                 -->
             <div class="form-group">
+              
                 <label for="nomE">nomE</label>
                 <input type="text" class="form-control" id="nomE" placeholder="nomE" formControlName="nomE">
                 <div *ngIf="f['nomE'].touched">
@@ -106,6 +107,9 @@
 
             <button type="button" class="btn btn-light" (click)="eventForm.reset()">Annuler</button>
 
+            <button matTooltip="Edit Task" class="btn btn-success bnt-rounded btn-icon" [routerLink]="['/admin/evenement/listevent']">
+              <i class="mdi mdi-format-list-bulleted-type"></i>
+            </button> 
             </form>
         </div>
         </div>
