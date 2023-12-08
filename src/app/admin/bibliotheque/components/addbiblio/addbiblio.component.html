@@ -3,101 +3,72 @@
       <div class="card">
       <div class="card-body">
           <h4 class="card-title">Ajouter Bibliotheque </h4>
-          <app-msgerreur #MsgErrorSuccess  (messageEvent)="receiveMessage($event)"></app-msgerreur>
 
-            <form [formGroup]="biblioForm" (ngSubmit)="AjouterBiblio()" >
-             <!--<input type="hidden" formControlName="idBibliotheque">-->
-
-          <div class="form-group">
+          <form class="forms-sample"  #addBiblio="ngForm">
+            <div class="form-group">
               <label for="nomB">Nom</label>
-              <input type="text" class="form-control" id="nomB" placeholder="nomB" formControlName="nomB">
-              <div *ngIf="f['nomB'].touched">
-                  <div *ngIf="f['nomB'].errors?.['required']" class="error">
-                    <p> <i class="mdi mdi-alert-circle-outline"></i> Ce champ est requis</p> 
-                    
-                  </div>
-                  <div *ngIf="f['nomB'].errors?.['minlength']" class="error">
-                    <p> <i class="mdi mdi-alert-circle-outline"></i> le nom doit contenir minimum 3 caractéres</p>
-                  </div>
+              <input type="text" class="form-control" id="nomB" rows="4" placeholder="nomB" name="nomB"  required [(ngModel)]="biblio.nomB" #nomB="ngModel" >
+              <div *ngIf="nomB.invalid && nomB.touched" class="invalid">
+                  <span *ngIf="nomB.errors?.['required']"> <p> <i class="mdi mdi-alert-circle-outline"></i> Veuillez renseigner votre email </p> 
+                  </span>
+                  <span *ngIf="nomB.errors?.['pattern']"> <p> <i class="mdi mdi-alert-circle-outline"></i> Votre email n'est pas valide </p></span>
               </div>
           </div>
-          
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email">
-            <div *ngIf="f['email'].touched">
-                <div *ngIf="f['email'].errors?.['required']" class="error">
-                  <p> <i class="mdi mdi-alert-circle-outline"></i> Ce champ est requis</p> 
-                  
-                </div>
-                <div *ngIf="f['email'].errors?.['minlength']" class="error">
-                  <p> <i class="mdi mdi-alert-circle-outline"></i> le mail n'est pas valide</p>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-          <label for="numTel">Numéro de Télephone</label>
-          <input type="number" class="form-control" id="numTel" placeholder="Numéro de Télephone" formControlName="numTel">
-          <div *ngIf="f['numTel'].touched">
-              <div *ngIf="f['numTel'].errors?.['required']" class="error">
-                <p> <i class="mdi mdi-alert-circle-outline"></i> Ce champ est requis</p> 
-                
-              </div>
-              <div *ngIf="f['numTel'].errors?.['minlength']" class="error">
-                <p> <i class="mdi mdi-alert-circle-outline"></i> le numéro n'est pas valide</p>
-              </div>
-          </div>
-      </div>
 
-     
-         
-          <div class="form-group">
-              <label for="exampleInputName1">Horaire</label>
-              <input type="horaire" class="form-control" id="horaire" placeholder="Horaire" formControlName="horaire">
-              <div *ngIf="f['horaire'].touched">
-                  <div *ngIf="f['horaire'].errors?.['required']" class="error">
-                    <p> <i class="mdi mdi-alert-circle-outline"></i>Ce champ est requis</p> 
-                    
+              <div class="form-group">
+                  <label for="email">Email</label>
+                  <input type="email" class="form-control" id="email" rows="4" placeholder="Email" name="email"  required [(ngModel)]="biblio.email" #email="ngModel" >
+                  <div *ngIf="email.invalid && email.touched" class="invalid">
+                      <span *ngIf="email.errors?.['required']"> <p> <i class="mdi mdi-alert-circle-outline"></i> Veuillez renseigner votre email </p> 
+                      </span>
+                      <span *ngIf="email.errors?.['pattern']"> <p> <i class="mdi mdi-alert-circle-outline"></i> Votre email n'est pas valide </p></span>
                   </div>
-                  <div *ngIf="f['horaire'].errors?.['minlength']" class="error">
-                    <p> <i class="mdi mdi-alert-circle-outline"></i> L'Horaire doit contenir minimum 3 caractéres</p>
+              </div>
+
+
+               <div class="form-group">
+                  <label for="numTel">numTel</label>
+                  <input type="text" class="form-control" id="numTel" rows="4" placeholder="numTel" name="numTel"  required [(ngModel)]="biblio.numTel" #numTel="ngModel" >
+                  <div *ngIf="numTel.invalid && numTel.touched" class="invalid">
+                      <span *ngIf="numTel.errors?.['required']"> <p> <i class="mdi mdi-alert-circle-outline"></i> Veuillez renseigner votre email </p> 
+                      </span>
                   </div>
+              </div>
+              
+            <div class="form-group">
+              <label for="horaire">horaire</label>
+              <input type="text" class="form-control" id="horaire" rows="4" placeholder="horaire" name="horaire"  required [(ngModel)]="biblio.horaire" #horaire="ngModel" >
+              <div *ngIf="horaire.invalid && nomB.touched" class="invalid">
+                  <span *ngIf="horaire.errors?.['required']"> <p> <i class="mdi mdi-alert-circle-outline"></i> Veuillez renseigner votre email </p> 
+                  </span>
               </div>
           </div>
           
-          <div class="form-group">
-              <label for="description">Description</label>
-              <textarea class="form-control" id="description" rows="4" placeholder="Description" formControlName="description"></textarea>
-              <div *ngIf="f['description'].touched">
-                  <div *ngIf="f['description'].errors?.['required']" class="error">
-                    <p> <i class="mdi mdi-alert-circle-outline"></i> Ce champ est requis</p> 
-                    
-                  </div>
-                  <div *ngIf="f['description'].errors?.['minlength']" class="error">
-                    <p> <i class="mdi mdi-alert-circle-outline"></i> la description doit contenir minimum 5 caractéres</p>
-                  </div>
+            <div class="form-group">
+              <label for="description">description</label>
+              <input type="text" class="form-control" id="description" rows="4" placeholder="description" name="description"  required [(ngModel)]="biblio.description" #description="ngModel" >
+              <div *ngIf="description.invalid && description.touched" class="invalid">
+                  <span *ngIf="nomB.errors?.['required']"> <p> <i class="mdi mdi-alert-circle-outline"></i> Veuillez renseigner votre email </p> 
+                  </span>
               </div>
-          </div> 
+          </div>
+
           <div class="form-group">
-            <label>Image</label>
+            <label for="imageB">Image</label>
             <div class="input-group col-xs-12">
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="customFile1" name="img[]" formControlName="imageB" (change)="onFileChanged($event)">
-
-                    <label class="custom-file-label" for="customFile">{{ selectedFile ? selectedFile.name : 'Choisir une image' }}</label>
+                  <input type="file" class="custom-file-input" id="customFile" name="img[]" (change)="onFileChanged($event)">
+                  <label class="custom-file-label" for="customFile">{{ selectedFile ? selectedFile.name : 'Choisir une image' }}</label>
                 </div>
             </div>
         </div>
-          
-          
-         
-          <button type="submit" class="btn btn-primary mr-2" [disabled]="biblioForm.invalid">Ajouter</button>
-          <button type="button" class="btn btn-light" (click)="biblioForm.reset()">Annuler</button>
+
+             
+               
+                  <button type="submit" class="btn btn-primary mr-2" [disabled]="addBiblio.invalid"  (click)="AjouterBiblio()" >Ajouter</button>
 
           </form>
       </div>
       </div>
   </div>
 </div>    
-
-<app-listbiblio></app-listbiblio>

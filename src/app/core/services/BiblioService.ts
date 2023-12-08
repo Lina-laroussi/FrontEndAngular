@@ -23,7 +23,7 @@ export class BiblioService {
     formData.append('numTel', numTel.toString());
     formData.append('horaire', horaire);
     formData.append('description', description);
-    formData.append('imageB', imageB,imageB.name);
+    formData.append('imageB', imageB, imageB ? imageB.name : 'defaultFileName');
 
     const headers = new HttpHeaders();
     headers.set('Content-Type', 'multipart/form-data');
