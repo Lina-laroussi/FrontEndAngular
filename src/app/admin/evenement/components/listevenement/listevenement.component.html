@@ -1,0 +1,63 @@
+<div class="content-wrapper">
+    <div class="row">
+       <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Liste des évenements</h4>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>Nom</th>
+                    <th>Date Début</th>
+                    <th>Date Fin</th>
+                    <th>Lieu</th>
+                    <th>Etat</th>
+                    <th>       </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                  <tr *ngFor="let evenement of eventList | async">
+                    <td><img [src]="urlImage + '/' + evenement.idEvenement + '/' + evenement.image" alt=" Image" width="50" height="50"></td>
+                    <td>{{evenement.nomE | titlecase}}</td>
+                    <td>{{evenement.dateDebut| date: 'dd/MM/yyyy' }}</td>
+                    <td>{{evenement.dateFin| date: 'dd/MM/yyyy' }}</td>
+                    <td>{{evenement.lieu}}</td>
+                  
+                    <td>
+                      <label class="badge" [ngClass]="{
+
+                       'badge-info': evenement.etatEvent === 'EN_COURS',
+
+                       'badge-danger': evenement.etatEvent === 'ANNULE',
+
+                       'badge-warning': evenement.etatEvent === 'REPORTE',
+
+                       'badge-success': evenement.etatEvent === 'PLANIFIE'
+                       
+                       }">
+                      {{evenement.etatEvent}}
+                                              </label></td>
+                  
+                    <td>{{evenement.description | titlecase}}</td>
+                    <td style="width: 20%;">
+                      <button matTooltip="Edit Task" class="btn btn-warning bnt-rounded btn-icon" [routerLink]="['/admin/evenement/updateevent', evenement.idEvenement]">
+                        <i class="mdi mdi-grease-pencil"></i>
+                      </button>           
+            <button class="btn btn-danger bnt-rounded btn-icon ml-4" (click)="supprimerEvenement(evenement.idEvenement)">
+              <i class="mdi mdi-delete"></i>
+
+            </button>
+                    </td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>    

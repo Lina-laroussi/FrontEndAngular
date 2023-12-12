@@ -7,7 +7,8 @@ import { ListCategorieComponent } from './components/list-categorie/list-categor
 import { ListLivresComponent } from './components/list-livres/list-livres.component';
 import { DemandeEmpruntComponent } from './components/demande-emprunt/demande-emprunt.component';
 import { RoleGuard } from '../shared/guards/role.guard';
-
+import { BiblioComponent } from './components/biblio/biblio.component';
+import { CalendrierComponent } from './components/calendrier/calendrier.component';
 const routes: Routes = [
   {path:'accueil' , component:AccueilFrontComponent},
   { path: '', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
@@ -26,7 +27,15 @@ const routes: Routes = [
   expectedRole: 'ETUDIANT' }},
   {path:'emprunterLivre/:idLivre' , component:DemandeEmpruntComponent,canActivate: [AuthGuard,RoleGuard], 
   data: { 
-  expectedRole: 'ETUDIANT' }}
+  expectedRole: 'ETUDIANT' }},
+
+  {path:'Bib/:idFoyer' , component:BiblioComponent,canActivate: [AuthGuard,RoleGuard], 
+  data: { 
+  expectedRole: 'ETUDIANT' }},
+  {path: 'calendrier/:idBibliotheque', component: CalendrierComponent ,canActivate: [AuthGuard,RoleGuard], 
+  data: { 
+  expectedRole: 'ETUDIANT' }}, 
+
 ];
 
 @NgModule({

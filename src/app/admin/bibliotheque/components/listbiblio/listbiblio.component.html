@@ -1,0 +1,65 @@
+<div class="content-wrapper">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Rechercher par nom" [(ngModel)]="searchTerm" (input)="searchBiblios()">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" (click)="clearSearch()">Effacer</button>
+          </div>
+        </div>
+      </div>
+      <button matTooltip="Edit Task" class="btn btn-primary mr-2" [routerLink]="['/admin/bibliotheque/addbiblio']">
+        Ajouter une bibliotheque
+      </button> 
+      <br>
+ 
+      <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Liste des Bibliotheques</h4>
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Numéro de Téléphone</th>
+                    <th>Horaire</th>
+                    <th>Description</th>
+                    <th>       </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    
+                  <tr *ngFor="let biblio of biblioList | async" appBackground >
+                    <td><img [src]="urlImage + '/' + biblio.idBibliotheque + '/' + biblio.imageB" alt=" Image" width="50" height="50"></td>
+                    <td>{{biblio.nomB | titlecase}}</td>
+                    <td>{{biblio.email}}</td>
+                    <td>{{biblio.numTel}}</td>
+                    <td>{{biblio.horaire}}</td>
+                    <td>{{biblio.description | titlecase}}</td>
+                    <td style="width: 20%;">
+                      <!--<button class="btn btn-warning" *ngIf="biblio.idBibliotheque !== undefined" (click)="redirigerVersModification(biblio.idBibliotheque)">Modifier</button>-->
+                      <button matTooltip="Edit Task" class="btn btn-success bnt-rounded btn-icon mr-4 " (click)="openModalAjout(biblio.idBibliotheque)">
+                        <i class="mdi mdi-book-open-variant"></i>
+                            </button>
+                      <button matTooltip="Edit Task" class="btn btn-warning bnt-rounded btn-icon " [routerLink]="['/admin/bibliotheque/updatebiblio', biblio.idBibliotheque]">
+                  <i class="mdi mdi-grease-pencil"></i>
+                      </button>         
+                   <button class="btn btn-danger bnt-rounded btn-icon ml-4 " (click)="supprimerBiblio(biblio.idBibliotheque)">
+                   <i class="mdi mdi-delete"></i>
+                  </button>
+ 
+                  </td>
+                  </tr>
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>    

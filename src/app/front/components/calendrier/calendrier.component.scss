@@ -1,0 +1,29 @@
+/* calendar.component.css */
+.calendar-container {
+    height: 800px;
+    width: 1000px;
+  }
+  .event-annule {
+    display: none;  // Rend l'événement invisible s'il est annulé
+  }
+  
+  .event-reporte {
+    color: yellow;  // Définit la couleur du texte pour les événements reportés
+  }
+  
+  .event-en-cours {
+    color: blue;    // Définit la couleur du texte pour les événements en cours
+  }
+  
+  .event-planifie {
+    color: green;   // Définit la couleur du texte pour les événements planifiés
+  }
+  .fc-event{
+    width: 150px;
+    margin: 10px;
+    z-index: 99;
+    padding: 5px;
+    cursor: move
+  }
+
+

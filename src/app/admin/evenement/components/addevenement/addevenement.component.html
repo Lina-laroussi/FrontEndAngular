@@ -1,0 +1,112 @@
+<p>Données du parent : {{ parentData }}</p>
+
+<div class="content-wrapper">
+  <div class="col-12 grid-margin stretch-card">
+      <div class="card">
+      <div class="card-body">
+          <h4 class="card-title">Ajouter Evenement </h4>
+          <form [formGroup]="evenementForm" (ngSubmit)="AjouterEvent()" >
+            <div class="form-group">
+              <label for="exampleselectName1">Bibliotheque</label>
+              <select class="form-control" id="bibliotheque" laceholder="bibliotheque" formControlName="bibliotheque"> 
+                <option value="" selected disabled >Choisir Bibliotheque</option>
+                <option *ngFor="let bibliotheque of bibliotheques | async" [value]="bibliotheque.idBibliotheque">
+                  {{ bibliotheque.nomB | titlecase}}
+                </option>
+              </select>
+
+              <div *ngIf="f['bibliotheque'].touched">
+                  <div *ngIf="f['bibliotheque'].errors?.['required']" class="error">
+                    <p> <i class="mdi mdi-alert-circle-outline"></i> Veuillez renseigner la bibliotheque </p> 
+                  </div>
+              </div>
+          </div> 
+          <div class="form-group">
+              <label for="nomE">nomE</label>
+              <input type="text" class="form-control" id="nomE" placeholder="nomE" formControlName="nomE">
+              <div *ngIf="f['nomE'].touched">
+                  <div *ngIf="f['nomE'].errors?.['required']" class="error">
+                    <p> <i class="mdi mdi-alert-circle-outline"></i> Ce champ est requis</p> 
+                    
+                  </div>
+                  <div *ngIf="f['nomE'].errors?.['minlength']" class="error">
+                    <p> <i class="mdi mdi-alert-circle-outline"></i> le nom doit contenir minimum 3 caractéres</p>
+                  </div>
+              </div>
+          </div>
+
+          <div class="form-group">
+              <label for="dateDebut">Date Début</label>
+              <input type="date" class="form-control" id="dateDebut" formControlName="dateDebut" >
+              <div *ngIf="f['dateDebut'].touched">
+                  <div *ngIf="f['dateDebut'].errors?.['required']" class="error">
+                    <p> <i class="mdi mdi-alert-circle-outline"></i>Ce champ est requis</p> 
+                  </div>
+                  </div>
+          </div>
+        
+          <div class="form-group" >
+              <label for="dateFin">Date Fin</label>
+              <input type="date" class="form-control" id="dateFin" formControlName="dateFin">
+              <div *ngIf="f['dateFin'].touched">
+                  <div *ngIf="f['dateFin'].errors?.['required']" class="error">
+                    <p> <i class="mdi mdi-alert-circle-outline"></i> Ce champ est requis</p> 
+                  </div>
+                  </div>
+          </div>
+          <div class="form-group">
+              <label for="exampleInputName1">Lieu</label>
+              <input type="lieu" class="form-control" id="lieu" placeholder="Lieu" formControlName="lieu">
+              <div *ngIf="f['lieu'].touched">
+                  <div *ngIf="f['lieu'].errors?.['required']" class="error">
+                    <p> <i class="mdi mdi-alert-circle-outline"></i>Ce champ est requis</p> 
+                    
+                  </div>
+                  <div *ngIf="f['lieu'].errors?.['minlength']" class="error">
+                    <p> <i class="mdi mdi-alert-circle-outline"></i> le lieu doit contenir minimum 3 caractéres</p>
+                  </div>
+              </div>
+          </div>
+          
+          <div class="form-group">
+              <label for="description">Description</label>
+              <textarea class="form-control" id="description" rows="4" placeholder="Description" formControlName="description"></textarea>
+              <div *ngIf="f['description'].touched">
+                  <div *ngIf="f['description'].errors?.['required']" class="error">
+                    <p> <i class="mdi mdi-alert-circle-outline"></i> Ce champ est requis</p> 
+                    
+                  </div>
+                  <div *ngIf="f['description'].errors?.['minlength']" class="error">
+                    <p> <i class="mdi mdi-alert-circle-outline"></i> la description doit contenir minimum 5 caractéres</p>
+                  </div>
+              </div>
+          </div> 
+          
+            <div class="form-group">
+              <label for="etatEvent">Etat</label>
+            <select id="etatEvent" class="form-control"  formControlName="etatEvent">
+              <option value="PLANIFIE" selected>PLANIFIE</option>
+              <option value="EN_COURS">EN_COURS</option>
+              <option value="REPORTE">REPORTE</option>
+              <option value="ANNULE" >ANNULE</option>
+            </select>  
+          </div>
+          <div class="form-group">
+              <label>Image</label>
+              <div class="input-group col-xs-12">
+                  <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="customFile" name="img[]" formControlName="image" (change)="onFileChanged($event)">
+
+                      <label class="custom-file-label" for="customFile">{{ selectedFile ? selectedFile.name : 'Choisir une image' }}</label>
+                  </div>
+              </div>
+          </div>
+          
+          <button type="submit" class="btn btn-primary mr-2" [disabled]="evenementForm.invalid">Ajouter</button>
+          <button type="button" class="btn btn-light" (click)="evenementForm.reset()">Annuler</button>
+
+          </form>
+      </div>
+      </div>
+  </div>
+</div>    

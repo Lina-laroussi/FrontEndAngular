@@ -1,0 +1,117 @@
+<div class="content-wrapper">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Modifier Evenement </h4>
+            <form [formGroup]="eventForm" (ngSubmit)=" ModifierEvent()">
+                
+               <!-- <div class="form-group">
+
+                    <label>Image</label>
+                    <input type="file" name="img[]" class="file-upload-default">
+                    <div class="input-group col-xs-12">
+                    <input type="text" class="form-control file-upload-info" disabled placeholder="Ajouter une image">
+                    <span class="input-group-append">
+                        <button class="file-upload-browse btn btn-primary" type="button">Ajouter Image</button>
+                    </span>
+                    </div>
+            
+                </div>
+                -->
+            <div class="form-group">
+              
+                <label for="nomE">nomE</label>
+                <input type="text" class="form-control" id="nomE" placeholder="nomE" formControlName="nomE">
+                <div *ngIf="f['nomE'].touched">
+                    <div *ngIf="f['nomE'].errors?.['required']" class="error">
+                      <p> <i class="mdi mdi-alert-circle-outline"></i> Ce champ est requis</p> 
+                      
+                    </div>
+                    <div *ngIf="f['nomE'].errors?.['minlength']" class="error">
+                      <p> <i class="mdi mdi-alert-circle-outline"></i> le nom doit contenir minimum 3 caractéres</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="dateDebut">Date Début</label>
+                <input type="date" class="form-control" id="dateDebut" formControlName="dateDebut" >
+                <div *ngIf="f['dateDebut'].touched">
+                    <div *ngIf="f['dateDebut'].errors?.['required']" class="error">
+                      <p> <i class="mdi mdi-alert-circle-outline"></i>Ce champ est requis</p> 
+                    </div>
+                    </div>
+            </div>
+           <!-- <div *ngIf="evenementForm['dated'].touched">
+                <div *ngIf="evenementForm['dated'].errors?.['required']" class="notification error closeable">
+                  <p>Please fill in all the required fields</p>
+                </div>
+              </div>
+            -->
+            <div class="form-group" >
+                <label for="dateFin">Date Fin</label>
+                <input type="date" class="form-control" id="dateFin" formControlName="dateFin">
+                <div *ngIf="f['dateFin'].touched">
+                    <div *ngIf="f['dateFin'].errors?.['required']" class="error">
+                      <p> <i class="mdi mdi-alert-circle-outline"></i> Ce champ est requis</p> 
+                    </div>
+                    </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputName1">Lieu</label>
+                <input type="lieu" class="form-control" id="lieu" placeholder="Lieu" formControlName="lieu">
+                <div *ngIf="f['lieu'].touched">
+                    <div *ngIf="f['lieu'].errors?.['required']" class="error">
+                      <p> <i class="mdi mdi-alert-circle-outline"></i>Ce champ est requis</p> 
+                      
+                    </div>
+                    <div *ngIf="f['lieu'].errors?.['minlength']" class="error">
+                      <p> <i class="mdi mdi-alert-circle-outline"></i> le lieu doit contenir minimum 3 caractéres</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" rows="4" placeholder="Description" formControlName="description"></textarea>
+                <div *ngIf="f['description'].touched">
+                    <div *ngIf="f['description'].errors?.['required']" class="error">
+                      <p> <i class="mdi mdi-alert-circle-outline"></i> Ce champ est requis</p> 
+                      
+                    </div>
+                    <div *ngIf="f['description'].errors?.['minlength']" class="error">
+                      <p> <i class="mdi mdi-alert-circle-outline"></i> la description doit contenir minimum 5 caractéres</p>
+                    </div>
+                </div>
+            </div> 
+            
+              <div class="form-group">
+                <label for="etatEvent">Etat</label>
+              <select id="etatEvent" class="form-control"  formControlName="etatEvent">
+                <option value="PLANIFIE">Planfié</option>
+                <option value="EN_COURS">En cours</option>
+                <option value="REPORTE">Reporté</option>
+                <option value="ANNULE" selected>Annulé</option>
+              </select>  
+            </div>
+            <div class="form-group">
+                <label>Image</label>
+                <div class="input-group col-xs-12">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile" name="img[]" formControlName="image" (change)="onFileChanged($event)">
+                        <label class="custom-file-label" for="customFile">{{ selectedFile ? selectedFile.name : 'Choisir une image' }}</label>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary mr-2" [disabled]="eventForm.invalid">Mettre à jour</button>
+
+            <button type="button" class="btn btn-light" (click)="eventForm.reset()">Annuler</button>
+
+            <button matTooltip="Edit Task" class="btn btn-success bnt-rounded btn-icon" [routerLink]="['/admin/evenement/listevent']">
+              <i class="mdi mdi-format-list-bulleted-type"></i>
+            </button> 
+            </form>
+        </div>
+        </div>
+    </div>
+</div>    

@@ -1,0 +1,99 @@
+<div class="content-wrapper">
+    <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Ajouter Bibliotheque </h4>
+              <form [formGroup]="biblioForm" (ngSubmit)="ModifierBiblio()" >
+                <input type="hidden" formControlName="idBibliotheque">
+  
+            <div class="form-group">
+                <label for="nomB">Nom</label>
+                <input type="text" class="form-control" id="nomB" placeholder="nomB" formControlName="nomB">
+                <div *ngIf="f['nomB'].touched">
+                    <div *ngIf="f['nomB'].errors?.['required']" class="error">
+                      <p> <i class="mdi mdi-alert-circle-outline"></i> Ce champ est requis</p> 
+                      
+                    </div>
+                    <div *ngIf="f['nomB'].errors?.['minlength']" class="error">
+                      <p> <i class="mdi mdi-alert-circle-outline"></i> le nom doit contenir minimum 3 caractéres</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Email" formControlName="email">
+              <div *ngIf="f['email'].touched">
+                  <div *ngIf="f['email'].errors?.['required']" class="error">
+                    <p> <i class="mdi mdi-alert-circle-outline"></i> Ce champ est requis</p> 
+                    
+                  </div>
+                  <div *ngIf="f['email'].errors?.['minlength']" class="error">
+                    <p> <i class="mdi mdi-alert-circle-outline"></i> le mail n'est pas valide</p>
+                  </div>
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="numTel">Numéro de Télephone</label>
+            <input type="numTel" class="form-control" id="numTel" placeholder="Numéro de Télephone" formControlName="numTel">
+            <div *ngIf="f['numTel'].touched">
+                <div *ngIf="f['numTel'].errors?.['required']" class="error">
+                  <p> <i class="mdi mdi-alert-circle-outline"></i> Ce champ est requis</p> 
+                  
+                </div>
+                <div *ngIf="f['numTel'].errors?.['minlength']" class="error">
+                  <p> <i class="mdi mdi-alert-circle-outline"></i> le numéro n'est pas valide</p>
+                </div>
+            </div>
+        </div>
+  
+       
+           
+            <div class="form-group">
+                <label for="exampleInputName1">Horaire</label>
+                <input type="horaire" class="form-control" id="horaire" placeholder="Horaire" formControlName="horaire">
+                <div *ngIf="f['horaire'].touched">
+                    <div *ngIf="f['horaire'].errors?.['required']" class="error">
+                      <p> <i class="mdi mdi-alert-circle-outline"></i>Ce champ est requis</p> 
+                      
+                    </div>
+                    <div *ngIf="f['horaire'].errors?.['minlength']" class="error">
+                      <p> <i class="mdi mdi-alert-circle-outline"></i> L'Horaire doit contenir minimum 3 caractéres</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" rows="4" placeholder="Description" formControlName="description"></textarea>
+                <div *ngIf="f['description'].touched">
+                    <div *ngIf="f['description'].errors?.['required']" class="error">
+                      <p> <i class="mdi mdi-alert-circle-outline"></i> Ce champ est requis</p> 
+                      
+                    </div>
+                    <div *ngIf="f['description'].errors?.['minlength']" class="error">
+                      <p> <i class="mdi mdi-alert-circle-outline"></i> la description doit contenir minimum 5 caractéres</p>
+                    </div>
+                </div>
+            </div> 
+            <div class="form-group">
+              <label>Image</label>
+              <div class="input-group col-xs-12">
+                  <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="customFile" name="img[]" formControlName="imageB" (change)="onFileChanged($event)">
+                      <label class="custom-file-label" for="customFile">{{ selectedFile ? selectedFile.name : 'Choisir une image' }}</label>
+                  </div>
+              </div>
+          </div>
+            
+           
+            <button type="submit" class="btn btn-primary mr-2" [disabled]="biblioForm.invalid">Modifier</button>
+            <button type="button" class="btn btn-light" (click)="biblioForm.reset()">Annuler</button>
+            <button matTooltip="Edit Task" class="btn btn-info bnt-rounded btn-icon" [routerLink]="['/admin/bibliotheque/listbiblio']">
+              <i class="mdi mdi-format-list-bulleted-type"></i>
+            </button>
+            </form>
+        </div>
+        </div>
+    </div>
+  </div> 

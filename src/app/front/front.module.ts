@@ -2,6 +2,9 @@ import { NgModule,LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FrontRoutingModule } from './front-routing.module';
 import { AccueilFrontComponent } from './components/accueil-front/accueil-front.component';
+import { CalendrierComponent } from './components/calendrier/calendrier.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { RouterModule } from '@angular/router';  
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from '../shared/interceptors/auth-interceptor.service';
@@ -24,14 +27,17 @@ import { LivreComponent } from './components/livre/livre.component';
     ListLivresComponent,
     LivreDetailsComponent,
     DemandeEmpruntComponent,
-    LivreComponent
+    LivreComponent,
+    CalendrierComponent,
   ],
   imports: [
     CommonModule,
     FrontRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    FullCalendarModule,
+    RouterModule,
   ],
 
   

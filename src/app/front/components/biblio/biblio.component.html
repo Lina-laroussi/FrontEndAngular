@@ -1,0 +1,89 @@
+    <section style="padding-top: 7rem;">
+        <div class="bg-holder" style="background-image:url(assets/images/biblio.jpg);">
+        </div>
+        <div class="container-fluid">
+            
+
+            <div class="row align-items-center">
+                <div class="col-md-5 col-lg-6 order-0 order-md-1 text-end"><img class="pt-7 pt-md-0 hero-img"
+                    [src]="urlImage + '/' + bibliotheque.idBibliotheque + '/' + bibliotheque.imageB" alt="biblio" /></div>
+                <div class="col-md-7 col-lg-6 text-md-start text-center py-6">
+                    <h1 class="fw-bold text-info mb-3">Accès gratuit à la Bibliothèque</h1>
+                    <p class="biblio-name">{{ bibliotheque.nomB }}</p>
+                    <p class="biblio-email">Email: {{ bibliotheque.email }}</p>
+                    <p class="biblio-horaire">Horaire: {{ bibliotheque.horaire }}</p>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="container-xxl py-5 biblio">
+      <div class="mb-7 text-center">
+          <h1 class="hero-title">Voyage Littéraire</h1>
+          <p class="mb-4 fw-medium">Explorez notre vaste collection de livres,
+              allant des classiques intemporels aux dernières nouveautés.
+              La connaissance est à portée de main!
+          </p>
+      </div>
+      <div class="container">
+          <div class="row">
+              <div class="col-md-6 mx-auto wow zoomIn" data-wow-delay="0.1s">
+                  <a class="position-relative d-block overflow-hidden">
+                      <img class="img-fluid" src="./../assets/images/livres.jpg"
+                          style="box-shadow: 0 20px 20px rgba(88, 86, 86, 0.92); border-radius: 10px; width: 520px; height: 310px;"
+                          alt="">
+                  </a>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  <!-- Troisième section -->
+  <div class="container-xxl py-5 biblio">
+      <div class="mb-7 text-center">
+          <h1 class="hero-title">Espace de Révision</h1>
+          <p class="mb-4 fw-medium">Besoin d'un endroit calme pour étudier?
+              Profitez de nos espaces dédiés à la révision, équipés de ressources utiles pour optimiser
+              votre apprentissage.
+          </p>
+      </div>
+      <div class="container">
+          <div class="row">
+              <div class="col-md-6 mx-auto wow zoomIn" data-wow-delay="0.1s">
+                  <a class="position-relative d-block overflow-hidden">
+                      <img class="img-fluid" src="./../assets/images/revision.png"
+                          style="box-shadow: 0 20px 20px rgba(88, 86, 86, 0.92); border-radius: 10px; width: 520px; height: 310px;"
+                          alt="">
+                  </a>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  <!-- Quatrième section -->
+  <div class="container-xxl py-5 destination">
+      <div class="mb-7 text-center">
+          <h1 class="hero-title">Événements Culturels</h1>
+          <p class="mb-4 fw-medium">Plongez dans la culture avec nos événements passionnants! <br>
+            
+            Des discussions d'auteurs aux ateliers créatifs, il y en a pour tous les goûts. <br>
+              Consultez notre calendrier d'événements pour connaître les dernières activités.
+          </p>
+      </div>
+      <div class="container">
+          <div class="row">
+              <div class="col-md-6 mx-auto wow zoomIn" data-wow-delay="0.1s">
+                  <a class="position-relative d-block overflow-hidden">
+                      <img class="img-fluid" src="./../assets/images/calendar.png"
+                          style="box-shadow: 0 20px 20px rgba(88, 86, 86, 0.92); border-radius: 10px; width: 520px; height: 310px;"
+                          alt="">
+                  </a>
+                  <button class="btn btn-primary mt-3" (click)="navigateToCalendrier()">
+                    Aller vers le calendrier
+                  </button>
+                                                  </div>
+          </div>
+      </div>
+  </div>
+
+ 

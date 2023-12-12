@@ -1,0 +1,11 @@
+p{
+    color: red;
+}
+
+.ng-touched.ng-invalid{
+    border-color: red;
+}
+
+.ng-valid{
+    border-color: green;
+}

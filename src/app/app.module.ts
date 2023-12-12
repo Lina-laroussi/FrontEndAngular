@@ -8,6 +8,9 @@ import { HttpClientModule, HttpClientXsrfModule } from '@angular/common/http';
 import { CoreModule } from './core/core.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import { RouterModule } from '@angular/router';  
+
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { httpInterceptorProviders } from './shared/interceptors';
@@ -34,7 +37,13 @@ import { AdminModule } from './admin/admin.module';
     CoreModule,
     ReactiveFormsModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FullCalendarModule,
+    RouterModule.forRoot([]),
+
+   
+
+
   ],
 
   

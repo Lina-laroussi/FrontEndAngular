@@ -26,6 +26,8 @@ const routes: Routes = [
   data: { 
   expectedRole: 'ADMIN' } },
 
+  {path: 'bibliotheque', loadChildren: () => import('./bibliotheque/bibliotheque.module').then(m => m.BibliothequeModule) },
+  {path: 'evenement', loadChildren: () => import('./evenement/evenement.module').then(m => m.EvenementModule) },
 
 ];
 

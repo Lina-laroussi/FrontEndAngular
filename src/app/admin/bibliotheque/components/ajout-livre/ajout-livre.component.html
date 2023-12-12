@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>{{data.title}}</h1>
+
+<div *ngIf="msg">
+    <div class="alert alert-success" role="alert">
+        {{msg}}
+    </div>
+</div>
+
+<div *ngIf="error">
+    <div class="alert alert-danger" role="alert">
+        {{error}}
+    </div>
+</div>
+
+<div mat-dialog-content>
+    <form class="forms-sample" [formGroup]="ajoutLivreForm" (ngSubmit)="ajouterLivre()">
+
+        <div class="form-group">
+          <label for="exampleselectName1">Livres</label>
+          <select class="form-control" id="exampleselectName1" name="livre" formControlName="livre"> 
+            <option [value]="" selected disabled >Selectionner un livre</option>
+            <option *ngFor="let livre of livreList | async" [value]="livre.idLivre" >
+              {{ livre.titre | titlecase}}
+            </option>
+          </select>
+        </div> 
+         
+
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-primary mr-2"  >Ajouter</button>
+        </div>
+        </form>
+</div>
