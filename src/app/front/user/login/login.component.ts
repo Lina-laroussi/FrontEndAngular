@@ -29,7 +29,13 @@ export class LoginComponent implements OnInit{
       next:(response) => {
         let token = response.token;
         localStorage.setItem('Token', token);
-        this.route.navigateByUrl("/front/accueil");
+        if(this.userService.getRole()=="ETUDIANT"){
+          this.route.navigateByUrl("/front/accueil");
+
+        }else if(this.userService.getRole()=="ADMIN"){
+          this.route.navigateByUrl("/admin/accueil");
+
+        }
       },
       error:(error) => {        
           console.log(error);

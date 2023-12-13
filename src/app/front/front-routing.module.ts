@@ -9,8 +9,10 @@ import { DemandeEmpruntComponent } from './components/demande-emprunt/demande-em
 import { RoleGuard } from '../shared/guards/role.guard';
 import { BiblioComponent } from './components/biblio/biblio.component';
 import { CalendrierComponent } from './components/calendrier/calendrier.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 const routes: Routes = [
-  {path:'accueil' , component:AccueilFrontComponent},
+  {path:'welcome',component:WelcomeComponent},
+  {path:'accueil' , component:WelcomeComponent},
   { path: '', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
   { path: 'reclamation', loadChildren: () => import('./reclamation/reclamation.module').then(m => m.ReclamationModule) },
   {path:'accueil' , component:AccueilFrontComponent,canActivate: [AuthGuard,RoleGuard], 

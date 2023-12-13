@@ -31,7 +31,8 @@ import { AlertComponent } from './components/alert/alert.component';
     FooterComponent,
     PaginationDirective,
     SpinnerModalComponent,
-    AlertComponent
+    AlertComponent,
+
 
   ]
 })

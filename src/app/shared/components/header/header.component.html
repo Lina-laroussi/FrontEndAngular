@@ -100,19 +100,19 @@
          <li class="front"><a routerLink="/front/accueil">Accueil</a></li>
          <li class="front"><a routerLink="/front/Bib/1">Biblothéques</a></li>
          <li class="front"><a routerLink="/front/listCategory">Livres</a></li>
-
+         <li class="front"><a [routerLink]="['/front/reclamation/mesRec']">Réclamations</a></li>
          <li class="front"><a href="#">Contact</a></li>
-         <div class="dropdown">
+         <li class="front"><button  class="btn btn-primary" type="button" (click)="logout()" style="font-size: 7px;">Se déconnecter</button></li>
+
+         <!--<div class="dropdown">
           <button class="btn btn-secondary dropdown-toggle" type="button" id="userDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-user" aria-hidden="true"></i> <!-- Use the appropriate user icon class -->
           </button>
           <div *ngIf="isAuthenticated()" class="dropdown-menu" aria-labelledby="userDropdown">
             <li class="dropdown-item">
-              <!-- Add your profile link here -->
+              Add your profile link here
               <a [routerLink]="['/front/updateProfile']">Profile</a>
             </li>
             <li class="dropdown-item">
-              <!-- Add your profile link here -->
               <a [routerLink]="['/front/reclamation/mesRec']">Mes reclamations</a>
             </li>
             <li *ngIf="isAuthenticated()" class="dropdown-item">
@@ -122,7 +122,7 @@
             </li>
           
           </div>
-        </div>
+        </div>-->
         <li><button *ngIf="!isAuthenticated() && isFrontRoute()" class="btn btn-primary" type="button" data-toggle="offcanvas"  >
           Créer un compte
         </button></li>
@@ -308,42 +308,39 @@
         <ul class="nav">
           <li class="nav-item">
             <a class="nav-link" routerLink="/admin/accueil">
-              <i class="icon-grid menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
          
           <li class="nav-item">
             <a class="nav-link" routerLink="admin/etudiants">
-              <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Liste d'étudiants</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/admin/reclamation/listeRec">
-              <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Reclamations</span>
             </a>
           </li>
       
           <li class="nav-item">
             <a class="nav-link" routerLink="/admin/bibliotheque/listbiblio">
-              <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Bibliotheque</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" routerLink="/admin/evenement/calendar">
-              <i class="icon-paper menu-icon"></i>
               <span class="menu-title">Evénements</span>
             </a>
           </li>
-              <li class="nav-item"> <a class="nav-link" routerLink="/admin/categorie/list">   <i class="icon-paper menu-icon"></i>
+              <li class="nav-item"> <a class="nav-link" routerLink="/admin/categorie/list"> 
                 <span class="menu-title">Categories</span></a></li>
-              <li class="nav-item"> <a class="nav-link" routerLink="/admin/livre/list"><i class="icon-paper menu-icon"></i>
+              <li class="nav-item"> <a class="nav-link" routerLink="/admin/livre/list">
                 <span class="menu-title">Livres</span></a></li>
-              <li class="nav-item"> <a class="nav-link" routerLink="/admin/empruntLivre/list"><i class="icon-paper menu-icon"></i>
+              <li class="nav-item"> <a class="nav-link" routerLink="/admin/empruntLivre/list">
                 <span class="menu-title">Emprunts</span></a></li>
+                <li class="nav-item"> <a class="nav-link" (click)="logout()">
+                  <span class="menu-title">Se déconnecter</span></a></li>
         </ul>
       </nav>
       <!-- partial -->
