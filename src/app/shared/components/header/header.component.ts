@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, RouteReuseStrategy, Router } from '@angular/router';
+import { JwksValidationHandler, OAuthService } from 'angular-oauth2-oidc';
 import { UserService } from 'src/app/services/user.service';
+import { authCodeFlowConfig } from 'src/app/unidorms-config';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +12,9 @@ import { UserService } from 'src/app/services/user.service';
 export class HeaderComponent {
 
 
-  constructor(private router:Router,private route : ActivatedRoute,private userService:UserService){
+  constructor(private router:Router,private route : ActivatedRoute,
+    private userService:UserService,
+    private oauthService:OAuthService){
     
   }
 
@@ -34,7 +38,7 @@ export class HeaderComponent {
     return this.router.url !== "/front/register" && this.router.url !== "/front/login" && this.router.url !== "/front/updateProfile" && this.router.url !== "/front/reclamation/mesRec";
   }
   logout(): void {
-    this.userService.logout().subscribe(
+    /*this.userService.logout().subscribe(
       () => {
         // Handle successful logout
         localStorage.removeItem('Token')
@@ -45,9 +49,18 @@ export class HeaderComponent {
       (error) => {
        // window.location.href = '/front/login'; // Redirect to the login page
       }    
-      );
+      );*/
+      this.userService.logoutk();
   }
   isAuthenticated():boolean{
     return this.userService.isAUthenticated();
+  }
+  configurerSingleSignOn(){
+    this.oauthService.configure(authCodeFlowConfig);
+    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
+  }
+  login(){
+    this.userService.login();
   }
 }

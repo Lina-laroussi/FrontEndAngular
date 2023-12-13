@@ -11,7 +11,7 @@ import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FullCalendarModule } from '@fullcalendar/angular';
 import { RouterModule } from '@angular/router';  
-
+import { APP_INITIALIZER } from '@angular/core';
 
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { httpInterceptorProviders } from './shared/interceptors';
@@ -20,8 +20,25 @@ import { FrontModule } from './front/front.module';
 import { AdminModule } from './admin/admin.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { QRCodeModule } from 'angularx-qrcode';
+import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
+import { OAuthModule } from 'angular-oauth2-oidc';
 
 
+/*function initializeKeycloak(keycloak: KeycloakService): () => Promise<any> {
+  return () =>
+    keycloak.init({
+      config: {
+        url: 'http://localhost:8080/auth',
+        realm: 'UniDorms',
+        clientId: 'angular-client',
+      },
+      initOptions: {
+        onLoad: 'login-required',
+        checkLoginIframe: false,
+      },
+      enableBearerInterceptor: true,
+    });
+}*/
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,9 +63,15 @@ import { QRCodeModule } from 'angularx-qrcode';
     
    
     FullCalendarModule,
-
+   // KeycloakAngularModule,
     RouterModule.forRoot([]),
-
+    OAuthModule.forRoot({
+      resourceServer: {
+       // allowedUrls: ['your-api-endpoint'],
+        sendAccessToken: true,
+      },
+      // other configurations
+    }),
    
 
 
@@ -56,7 +79,13 @@ import { QRCodeModule } from 'angularx-qrcode';
 
   
   providers: [
-    httpInterceptorProviders
+    httpInterceptorProviders,
+   /* {
+      provide: APP_INITIALIZER,
+      useFactory: initializeKeycloak,
+      multi: true,
+      deps: [KeycloakService]
+    }*/
 ],
     bootstrap: [AppComponent]
 })

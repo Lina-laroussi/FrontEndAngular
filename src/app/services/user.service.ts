@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as jwt from 'jwt-decode';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { KeycloakService } from 'keycloak-angular';
+import { AuthConfig, JwksValidationHandler, OAuthService } from 'angular-oauth2-oidc';
+import { authCodeFlowConfig } from '../unidorms-config';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +15,9 @@ export class UserService {
     headers : new HttpHeaders({'Content-Type': 'application/json'})}
   url ="http://localhost:8080/"
   constructor(private httpClient: HttpClient,
-    private jwtHelper:JwtHelperService) {
+    private jwtHelper:JwtHelperService,
+   // private keycloakService: KeycloakService,
+    private oauthService:OAuthService) {
 
 
   }
@@ -28,13 +33,38 @@ export class UserService {
   register(data:any):Observable<any>{
     return this.httpClient.post<any>(this.url+"utilisateurs/register",data)
   }
-  login(data:any):Observable<any>{
-    return this.httpClient.post<any>(this.url+"utilisateurs/login",data,this.httpOptions)
+  configurerSingleSignOn(){
+ 
+      const authCodeFlowConfig: AuthConfig = {
+        issuer: 'http://localhost:8080/auth/relms/UniDorms',
+        redirectUri: window.location.origin + 'http://localhost:4200',
+        clientId: 'angular-client',
+        responseType: 'code',
+        scope: 'openid profile email',
+        showDebugInformation: true, // pour le débogage, à désactiver en production
+      };
+    this.oauthService.configure(authCodeFlowConfig);
+    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
+    this.oauthService.loadDiscoveryDocumentAndTryLogin();
+  }
+  login(){
+    this.oauthService.initCodeFlow();
+    //return this.httpClient.post<any>(this.url+"utilisateurs/login",data,this.httpOptions)
   }
     logout():Observable<any>{
     return this.httpClient.put<any>(this.url+"utilisateurs/logout",{})
 
   }
+  logink(): void {
+    //this.keycloakService.logout('http://localhost:4200'); // Replace with your redirect URL
+  }
+
+  logoutk(): void {
+   // this.keycloakService.logout();
+   console.log("logout");
+   this.oauthService.logOut();
+  }
+
   getUser(id:any):Observable<any>{
     return this.httpClient.get<any>(`${this.url}utilisateurs/get/${id}`,this.httpOptions);
   }
@@ -65,7 +95,19 @@ export class UserService {
           return tokenPayload.roles[0].authority
    }
    isAUthenticated():boolean{
-    const token  = localStorage.getItem('Token') as string
-    return !this.jwtHelper.isTokenExpired(token)
+    //const token  = localStorage.getItem('Token') as string
+    //return !this.jwtHelper.isTokenExpired(token)
+    console.log(this.oauthService.hasValidAccessToken());
+
+    return this.oauthService.hasValidAccessToken();
+    
+
+   }
+   isAUthenticatedk():boolean{
+    return this.token;
+   }
+   get token(){
+    let claims: any = this.oauthService.getIdentityClaims();
+    return claims ?claims  : null;
    }
 }

@@ -14,44 +14,22 @@ import { CalendrierComponent } from './components/calendrier/calendrier.componen
 const routes: Routes = [
   { path: '', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
   { path: 'reclamation', loadChildren: () => import('./reclamation/reclamation.module').then(m => m.ReclamationModule) },
-  {path:'accueil' , component:AccueilFrontComponent,canActivate: [AuthGuard,RoleGuard], 
-  data: { 
-  expectedRole: 'ETUDIANT' } },
-  {path:'listCategory' , component:ListCategorieComponent,canActivate: [AuthGuard,RoleGuard], 
-  data: { 
-  expectedRole: 'ETUDIANT' } },
-  {path:'listLivres/:idCategory' , component:ListLivresComponent,canActivate: [AuthGuard,RoleGuard], 
-  data: { 
-  expectedRole: 'ETUDIANT' }},
-  {path:'livreDetails/:idLivre' , component:ListLivresComponent,canActivate: [AuthGuard,RoleGuard], 
-  data: { 
-  expectedRole: 'ETUDIANT' }},
+  {path:'accueil' , component:AccueilFrontComponent},
+  {path:'listCategory' , component:ListCategorieComponent},
+  {path:'listLivres/:idCategory' , component:ListLivresComponent},
+  {path:'livreDetails/:idLivre' , component:ListLivresComponent},
   {path:'emprunterLivre/:idLivre' , component:DemandeEmpruntComponent,canActivate: [AuthGuard,RoleGuard], 
   data: { 
   expectedRole: 'ETUDIANT' }},
-  { path: '', loadChildren: () => import('./universite/universite.module').then(m => m.UniversiteModule) ,canActivate: [AuthGuard,RoleGuard], 
-  data: { 
-  expectedRole: 'ETUDIANT' }},
-  { path: '', loadChildren: () => import('./departement/departement.module').then(m => m.DepartementModule) ,canActivate: [AuthGuard,RoleGuard], 
-  data: { 
-  expectedRole: 'ETUDIANT' }},
-  { path: 'foyer', loadChildren: () => import('./foyer/foyer.module').then(m => m.FoyerModule) ,canActivate: [AuthGuard,RoleGuard], 
-  data: { 
-  expectedRole: 'ETUDIANT' }},
-  { path: 'bloc', loadChildren: () => import('./bloc/bloc.module').then(m => m.BlocModule),canActivate: [AuthGuard,RoleGuard], 
-  data: { 
-  expectedRole: 'ETUDIANT' } },
-  {path:'reservation', loadChildren: () => import('../front/reservation/reservation.module').then(m => m.ReservationModule) ,canActivate: [AuthGuard,RoleGuard], 
-  data: { 
-  expectedRole: 'ETUDIANT' } },
+  { path: '', loadChildren: () => import('./universite/universite.module').then(m => m.UniversiteModule)},
+  { path: '', loadChildren: () => import('./departement/departement.module').then(m => m.DepartementModule)},
+  { path: 'foyer', loadChildren: () => import('./foyer/foyer.module').then(m => m.FoyerModule)},
+  { path: 'bloc', loadChildren: () => import('./bloc/bloc.module').then(m => m.BlocModule)},
+  {path:'reservation', loadChildren: () => import('../front/reservation/reservation.module').then(m => m.ReservationModule)},
 
 
-  {path:'Bib/:idFoyer' , component:BiblioComponent,canActivate: [AuthGuard,RoleGuard], 
-  data: { 
-  expectedRole: 'ETUDIANT' } },
-  {path: 'calendrier/:idBibliotheque', component: CalendrierComponent,canActivate: [AuthGuard,RoleGuard], 
-  data: { 
-  expectedRole: 'ETUDIANT' }  }, 
+  {path:'Bib/:idFoyer' , component:BiblioComponent},
+  {path: 'calendrier/:idBibliotheque', component: CalendrierComponent}, 
 ]
 
 
