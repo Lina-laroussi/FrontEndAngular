@@ -9,7 +9,7 @@ import * as jwt from 'jwt-decode';
 export class ReclamationService {
   httpOptions ={
     headers : new HttpHeaders({'Content-Type': 'application/json'})}
-  url ="http://localhost:8080/api/reclamations"
+  url ="http://localhost:8085/api/reclamations"
   constructor(private httpClient: HttpClient) {
 
 
@@ -20,8 +20,8 @@ export class ReclamationService {
   getAllRec(etat:string):Observable<any[]>{
     return this.httpClient.get<any[]>(`${this.url}/listeRec?etat=${etat}`)
   }
-  add(data:any,email:string):Observable<any>{
-    return this.httpClient.post<any>(`${this.url}/ajouter?email=${email}`,data)
+  add(data:any):Observable<any>{
+    return this.httpClient.post<any>(`${this.url}/ajouter`,data)
   }
   update(data:any,id:number):Observable<any>{
     return this.httpClient.put<any>(`${this.url}/modifier/${id}`,data)

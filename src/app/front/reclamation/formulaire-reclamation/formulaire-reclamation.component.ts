@@ -20,6 +20,8 @@ export class FormulaireReclamationComponent implements OnInit,OnChanges{
   showAlert: boolean = false;
   alertType: 'success' | 'error' = 'success';
   alertMessage: string | null = null;
+  username: string | undefined;
+  email: string ='';
   constructor(private formBuilder :FormBuilder,
     private userService:UserService,
     private reclamationService:ReclamationService,
@@ -27,6 +29,14 @@ export class FormulaireReclamationComponent implements OnInit,OnChanges{
 
   }
   ngOnInit(): void {
+    this.userService.getUserInfo().then((userProfile: any) => {
+      this.username = userProfile.username;
+      this.email = userProfile.email;
+
+      console.log('User Profile:', userProfile);
+    }).catch((error: any) => {
+      console.error(error);
+    });
     this.reclamationForm=this.formBuilder.group({
       sujet: ['', Validators.required],
       description: ['', Validators.required],
@@ -49,9 +59,9 @@ export class FormulaireReclamationComponent implements OnInit,OnChanges{
      }
      onSubmitForm(){
 
-      if(this.user.role == "ETUDIANT" && !this.isEdit){
+      if (!this.isEdit){
 
-      this.reclamationService.add(this.reclamationForm.value,this.user.email).subscribe({
+      this.reclamationService.add(this.reclamationForm.value).subscribe({
         next: (v) => {
           this.showAlert =true;
           this.alertType ='success';
@@ -71,7 +81,7 @@ export class FormulaireReclamationComponent implements OnInit,OnChanges{
        
        
       });
-    }else if(this.user.role == "ETUDIANT" && this.isEdit){
+    }else if(this.isEdit){
       
       this.reclamationService.update(this.reclamationForm.value,this.reclamation.id).subscribe({
         next: (v) => {

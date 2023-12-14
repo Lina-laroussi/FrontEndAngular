@@ -116,7 +116,7 @@
               <a [routerLink]="['/front/reclamation/mesRec']">Mes reclamations</a>
             </li>
             <li  class="dropdown-item">
-              <button class="btn btn-primary" type="button" (click)="login()" style="font-size: 10px;">
+              <button class="btn btn-primary" type="button" (click)="logout()" style="font-size: 10px;">
                 Se déconnecter
               </button>
             </li>
@@ -359,7 +359,7 @@
               <li class="nav-item"> <a class="nav-link" routerLink="/admin/empruntLivre/list">
                 <span class="menu-title">Emprunts</span></a></li>
                 <li *ngIf="isAuthenticated()" class="nav-item">
-                  <button class="nav-link" type="button" (click)="login()">
+                  <button class="nav-link" type="button" (click)="logout()">
                     <span class="menu-title">Se déconnecter</span>
                   </button>
                 </li>
@@ -376,7 +376,6 @@
       <div class="container-scroller" *ngIf="isFrontRoute()">
          <router-outlet></router-outlet>
       </div>
-      <button (click)="logout()" class="mt-5">logout</button>
     </div>   
   </div>
 

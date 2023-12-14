@@ -3,14 +3,14 @@ import { environement } from 'src/environement';
 
 export const authCodeFlowConfig: AuthConfig = {
   // Url of the Identity Provider
-  issuer: environement.Keycloak.issuer,
+  issuer: environement.keycloak.issuer,
 
   // URL of the SPA to redirect the user to after login
-  redirectUri: environement.Keycloak.redirectUri,
+ // redirectUri: environement.keycloak.re,
 
   // The SPA's id. The SPA is registerd with this id at the auth-server
   // clientId: 'server.code',
-  clientId: environement.Keycloak.clientId,
+  clientId: environement.keycloak.clientId,
 
   // Just needed if your auth server demands a secret. In general, this
   // is a sign that the auth server is not configured with SPAs in mind
@@ -18,13 +18,13 @@ export const authCodeFlowConfig: AuthConfig = {
   // such applications.
   // dummyClientSecret: 'secret',
 
-  responseType: 'code',
+  //responseType: 'code',
 
   // set the scope for the permissions the client should request
   // The first four are defined by OIDC.
   // Important: Request offline_access to get a refresh token
   // The api scope is a usecase specific one
-  scope: environement.Keycloak.scope,
+ // scope: environement.keycloak.scope,
 
   showDebugInformation: true,
 };

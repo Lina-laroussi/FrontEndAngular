@@ -19,16 +19,17 @@ constructor(private reclamationService:ReclamationService,
 
 }
 ngOnInit(): void {
-  this.userService.getUserByEmail(this.userService.getUserEmail()).subscribe(resultat=>{
-    this.user = resultat;
-    this.reclamationService.getMyRec( resultat.email,"archivé").subscribe({
-      next:(rec)=>this.reclamations =rec,
-      error:(r)=>alert(r)
-    }
-
+    this.reclamationService.getAllRec('archivé').subscribe(
+      {
+        next:(rec)=>this.reclamations =rec,
+        error:(r)=>alert(r)
+      }
     )
+     
+    
 
-  });
+  
+
   }
   deletedReclamation(rec:any){
     this.deletedRec = rec;

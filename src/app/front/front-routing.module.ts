@@ -12,15 +12,13 @@ import { UniversiteListComponent } from './universite/universite-list/universite
 import { BiblioComponent } from './components/biblio/biblio.component';
 import { CalendrierComponent } from './components/calendrier/calendrier.component';
 const routes: Routes = [
-  { path: '', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
-  { path: 'reclamation', loadChildren: () => import('./reclamation/reclamation.module').then(m => m.ReclamationModule) },
+  { path: '', loadChildren: () => import('./user/user.module').then(m => m.UserModule),canActivate: [AuthGuard] },
+  { path: 'reclamation', loadChildren: () => import('./reclamation/reclamation.module').then(m => m.ReclamationModule),canActivate: [AuthGuard] },
   {path:'accueil' , component:AccueilFrontComponent},
   {path:'listCategory' , component:ListCategorieComponent},
-  {path:'listLivres/:idCategory' , component:ListLivresComponent},
-  {path:'livreDetails/:idLivre' , component:ListLivresComponent},
-  {path:'emprunterLivre/:idLivre' , component:DemandeEmpruntComponent,canActivate: [AuthGuard,RoleGuard], 
-  data: { 
-  expectedRole: 'ETUDIANT' }},
+  {path:'listLivres/:idCategory' , component:ListLivresComponent,canActivate: [AuthGuard]},
+  {path:'livreDetails/:idLivre' , component:ListLivresComponent,canActivate: [AuthGuard]},
+  {path:'emprunterLivre/:idLivre' , component:DemandeEmpruntComponent,canActivate: [AuthGuard]},
   { path: '', loadChildren: () => import('./universite/universite.module').then(m => m.UniversiteModule)},
   { path: '', loadChildren: () => import('./departement/departement.module').then(m => m.DepartementModule)},
   { path: 'foyer', loadChildren: () => import('./foyer/foyer.module').then(m => m.FoyerModule)},

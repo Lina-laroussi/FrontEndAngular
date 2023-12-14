@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
-  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),    
+  canActivate: [AuthGuard],
+  data: { roles: ['ADMIN'] },
+  },
+
+
   { path: 'front', loadChildren: () => import('./front/front.module').then(m => m.FrontModule) },
   { path: '', redirectTo: '/admin/accueil', pathMatch: 'full' },
-    { path: 'admin/universite', loadChildren: () => import('./admin/universite/universite.module').then(m => m.UniversiteModule) },
-    { path: 'admin/departement', loadChildren: () => import('./admin/departement/departement.module').then(m => m.DepartementModule) },
-    { path: 'front/departement', loadChildren: () => import('./front/departement/departement.module').then(m => m.DepartementModule) },
-    { path: 'front/universite', loadChildren: () => import('./front/universite/universite.module').then(m => m.UniversiteModule) },
-
+    
 
 
   

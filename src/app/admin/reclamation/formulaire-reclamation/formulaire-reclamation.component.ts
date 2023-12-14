@@ -48,7 +48,7 @@ export class FormulaireReclamationComponent implements OnInit,OnChanges{
      }
      onSubmitForm(){
       if(!this.isEdit){
-      this.reclamationService.add(this.reclamationForm.value,this.user.email).subscribe({
+      this.reclamationService.add(this.reclamationForm.value).subscribe({
         next: (v) => {
           this.alertType ='success';
           this.alertMessage ='reclamation ajouté avec succés'

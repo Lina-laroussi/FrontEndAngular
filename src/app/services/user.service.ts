@@ -14,9 +14,11 @@ export class UserService {
   httpOptions ={
     headers : new HttpHeaders({'Content-Type': 'application/json'})}
   url ="http://localhost:8080/"
+  username: string | undefined;
+  email: string | undefined;
   constructor(private httpClient: HttpClient,
     private jwtHelper:JwtHelperService,
-   // private keycloakService: KeycloakService,
+    private keycloakService: KeycloakService,
     private oauthService:OAuthService) {
 
 
@@ -60,9 +62,20 @@ export class UserService {
   }
 
   logoutk(): void {
-   // this.keycloakService.logout();
+   this.keycloakService.logout();
    console.log("logout");
-   this.oauthService.logOut();
+   //this.oauthService.logOut();
+  }
+  async doLogin() {
+    await this.keycloakService.login();
+  }
+
+  async doLogout() {
+    await this.keycloakService.logout();
+  }
+
+  async isLoggedIn(): Promise<boolean> {
+    return await this.keycloakService.isLoggedIn();
   }
 
   getUser(id:any):Observable<any>{
@@ -88,18 +101,38 @@ export class UserService {
 
          return tokenPayload.sub
    }
-   getRole():string{
-    const token = localStorage.getItem('Token')as string
-    const tokenPayload :any = jwt.jwtDecode(token)
-         console.log(tokenPayload.roles[0].authority)
-          return tokenPayload.roles[0].authority
+   getRole(){
+  console.log(this.keycloakService.getUserRoles());
+   return this.keycloakService.getUserRoles()[0];
    }
+   getUserInfo(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.keycloakService
+        .loadUserProfile()
+        .then((userProfile: any) => {
+          if (userProfile) {
+            resolve(userProfile);
+          } else {
+            reject('User profile not available');
+          }
+        })
+        .catch((error: any) => {
+          reject(`Error loading user profile: ${error}`);
+        });
+    });
+  }
+
+
+
    isAUthenticated():boolean{
     //const token  = localStorage.getItem('Token') as string
     //return !this.jwtHelper.isTokenExpired(token)
-    console.log(this.oauthService.hasValidAccessToken());
+    //console.log(this.oauthService.hasValidAccessToken());
+    console.log( this.keycloakService.isLoggedIn()
+    );
+    return this.keycloakService.isLoggedIn();
 
-    return this.oauthService.hasValidAccessToken();
+    //return this.oauthService.hasValidAccessToken();
     
 
    }
